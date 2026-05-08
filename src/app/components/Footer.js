@@ -111,10 +111,10 @@ const Footer = () => {
             Pakistan Japan Training Center
           </div>
           <div style={{ display: "flex", gap: 10 }}>
-            {["f", "ig", "wa"].map((s) => (
+           
               <a
-                key={s}
-                href="#"
+                
+                href="https://www.instagram.com/ohayopakistan/"
                 style={{
                   color: "#fff",
                   fontSize: 11,
@@ -129,9 +129,9 @@ const Footer = () => {
                   fontWeight: 700,
                 }}
               >
-                {s}
+                ig
               </a>
-            ))}
+           
           </div>
         </div>
 

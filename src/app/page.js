@@ -219,24 +219,27 @@ export default function OhayoPage() {
 
         {/* Left: text content */}
         <div className="flex flex-col justify-center flex-1">
-          <p className="text-red-600 text-xs tracking-[0.5em] uppercase mb-6">Japan Training Center · Pakistan</p>
+          <p className="text-red-600 text-xs  tracking-[0.5em] uppercase mb-6 font-bold">Japan Training Center · Pakistan</p>
 
-          <h1 className="text-7xl sm:text-8xl lg:text-[120px] font-black leading-none mb-2 tracking-tighter">
+          <h1 className="text-7xl sm:text-8xl lg:text-[70px] font-black leading-none mb-2 tracking-tighter">
             OHAYO
           </h1>
-          <div className="text-white/40 text-4xl sm:text-5xl font-black tracking-[0.3em] mb-8">おはよう</div>
+            <h3 className="text-5xl sm:text-6xl lg:text-[70px] font-black leading-none mb-2 tracking-tighter">
+            PAKISTAN
+          </h3>
+          <div className="text-white/40 text-3xl sm:text-4xl font-black tracking-[0.3em] mb-8">おはようパキスタン</div>
 
           <p className="text-white/80 text-base sm:text-lg max-w-md leading-relaxed mb-10">
             Learn Japanese the right way. Expert JLPT N5 and N4 preparation for study and work in Japan.
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <button className="px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white text-xs font-black tracking-[0.2em] uppercase rounded transition-all hover:shadow-lg hover:shadow-red-600/30">
+            <a href="https://docs.google.com/forms/d/15aMcUMq4f8Xt98LAMRA0tE3D9mmAC2KXSIyAQE5NuEM/viewform?edit_requested=true" target="_blank" className="px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white text-xs font-black tracking-[0.2em] uppercase rounded transition-all hover:shadow-lg hover:shadow-red-600/30">
               Get Admission
-            </button>
-            <button className="px-8 py-3.5 border border-white/10 hover:border-white/30 text-white/85 hover:text-white text-xs font-bold tracking-[0.2em] uppercase rounded transition-all">
+            </a>
+            <Link href={"/courses"} className="px-8 py-3.5 border border-white/10 hover:border-white/30 text-white/85 hover:text-white text-xs font-bold tracking-[0.2em] uppercase rounded transition-all">
               Our Courses
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -281,24 +284,33 @@ export default function OhayoPage() {
             </h3>
             <p className="text-red-200/60 text-sm mt-2">July Session · Limited Seats</p>
           </div>
-          <button className="shrink-0 px-8 py-3.5 bg-white text-red-600 font-black text-xs tracking-[0.2em] uppercase rounded hover:bg-red-50 transition-all">
+          <a href="https://docs.google.com/forms/d/15aMcUMq4f8Xt98LAMRA0tE3D9mmAC2KXSIyAQE5NuEM/viewform?edit_requested=true" target="_blank" className="shrink-0 px-8 py-3.5 bg-white text-red-600 font-black text-xs tracking-[0.2em] uppercase rounded hover:bg-red-50 transition-all">
             Join Now →
-          </button>
+          </a>
         </div>
       </section>
 
       {/* ── ABOUT ── */}
       <section className="relative z-10 px-6 sm:px-12 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
-          {["チーム", "先生", "学生", "日本語"].map((k, i) => (
-            <div
-              key={k}
-              className={`${i === 0 ? "col-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] flex items-center justify-center`}
-            >
-              <span className="text-white/30 font-black text-2xl">{k}</span>
-            </div>
-          ))}
-        </div>
+      <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
+  {[
+    { label: "チーム", src: "/banner.jpeg" },
+    { label: "先生", src: "/images/teacher.jpg" },
+    { label: "学生", src: "/images/student.jpg" },
+    { label: "日本語", src: "/images/japanese.jpg" },
+  ].map(({ label, src }, i) => (
+    <div
+      key={label}
+      className={`${i === 0 ? "col-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] overflow-hidden`}
+    >
+      <img
+        src={src}
+        alt={label}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  ))}
+</div>
 
         <div className="order-1 lg:order-2">
           <p className="text-red-600 text-xs tracking-[0.5em] uppercase mb-4">About Us</p>
@@ -314,10 +326,10 @@ export default function OhayoPage() {
               "We believe in opening doors to global opportunities — one student at a time."
             </p>
             <footer className="text-red-600 text-xs font-bold tracking-wider uppercase mt-2">
-              — Muhammad Ilyas, CEO
+              — Afzal Ahmed, CEO
             </footer>
           </blockquote>
-          <a href="#" className="text-xs tracking-[0.2em] uppercase text-white/80 hover:text-red-500 transition-colors font-bold">
+          <a href="/about" className="text-xs tracking-[0.2em] uppercase text-white/80 hover:text-red-500 transition-colors font-bold">
             More About Us →
           </a>
         </div>
@@ -430,9 +442,9 @@ export default function OhayoPage() {
         <p className="text-white/65 text-sm max-w-md mx-auto mb-10">
           Have questions about courses or admissions? We are here to help you get to Japan.
         </p>
-        <button className="px-10 py-4 bg-red-600 hover:bg-red-500 text-white font-black text-xs tracking-[0.25em] uppercase rounded transition-all hover:shadow-xl hover:shadow-red-600/30">
+        <Link href={"/contact"} className="px-10 py-4 bg-red-600 hover:bg-red-500 text-white font-black text-xs tracking-[0.25em] uppercase rounded transition-all hover:shadow-xl hover:shadow-red-600/30">
           Contact Us
-        </button>
+        </Link>
         <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs tracking-wide">
           <span>📍 B-47, 2nd Floor Changery St., Rawalpindi</span>
           <span>✉ info@ohayo.com.pk</span>
