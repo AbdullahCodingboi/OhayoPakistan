@@ -359,7 +359,7 @@ export default function OhayoPage() {
             <p className="text-red-600 text-xs tracking-[0.5em] uppercase mb-2">ギャラリー</p>
             <h2 className="text-3xl font-black">Our Gallery</h2>
           </div>
-          <a href="#" className="text-white/70 hover:text-red-500 text-xs tracking-widest uppercase transition-colors font-bold">
+          <a href="/gallery" className="text-white/70 hover:text-red-500 text-xs tracking-widest uppercase transition-colors font-bold">
             View All →
           </a>
         </div>

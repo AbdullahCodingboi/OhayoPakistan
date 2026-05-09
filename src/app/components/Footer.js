@@ -155,7 +155,7 @@ const Footer = () => {
               Links
             </div>
             <div>
-              <button
+              {/* <button
                 onClick={() => setEditing((e) => !e)}
                 style={{
                   background: "transparent",
@@ -168,7 +168,7 @@ const Footer = () => {
                 }}
               >
                 {editing ? "Done" : "Edit"}
-              </button>
+              </button> */}
             </div>
           </div>
 

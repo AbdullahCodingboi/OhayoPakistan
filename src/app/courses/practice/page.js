@@ -2,31 +2,137 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-const CHARACTERS = [
-  { c: "日", label: "nichi / hi", meaning: "sun / day", strokes: 4 },
-  { c: "山", label: "yama",       meaning: "mountain",  strokes: 3 },
-  { c: "川", label: "kawa",       meaning: "river",     strokes: 3 },
-  { c: "月", label: "tsuki",      meaning: "moon",      strokes: 4 },
-  { c: "火", label: "hi",         meaning: "fire",      strokes: 4 },
-  { c: "水", label: "mizu",       meaning: "water",     strokes: 4 },
-  { c: "木", label: "ki",         meaning: "tree",      strokes: 4 },
-  { c: "金", label: "kin",        meaning: "gold",      strokes: 8 },
-  { c: "土", label: "tsuchi",     meaning: "earth",     strokes: 3 },
-  { c: "人", label: "hito",       meaning: "person",    strokes: 2 },
+
+const SCRIPT_TABS = [
+  { id: "kanji",    label: "漢字 Kanji"    },
+  { id: "hiragana", label: "ひらがな Hiragana" },
+  { id: "katakana", label: "カタカナ Katakana" },
 ];
+
+const CHARACTERS = {
+  kanji: [
+    { c: "日", label: "nichi / hi", meaning: "sun / day",  strokes: 4 },
+    { c: "山", label: "yama",       meaning: "mountain",   strokes: 3 },
+    { c: "川", label: "kawa",       meaning: "river",      strokes: 3 },
+    { c: "月", label: "tsuki",      meaning: "moon",       strokes: 4 },
+    { c: "火", label: "hi",         meaning: "fire",       strokes: 4 },
+    { c: "水", label: "mizu",       meaning: "water",      strokes: 4 },
+    { c: "木", label: "ki",         meaning: "tree",       strokes: 4 },
+    { c: "金", label: "kin",        meaning: "gold",       strokes: 8 },
+    { c: "土", label: "tsuchi",     meaning: "earth",      strokes: 3 },
+    { c: "人", label: "hito",       meaning: "person",     strokes: 2 },
+  ],
+  hiragana: [
+    { c: "あ", label: "a",   meaning: "a",   strokes: 3 },
+    { c: "い", label: "i",   meaning: "i",   strokes: 2 },
+    { c: "う", label: "u",   meaning: "u",   strokes: 2 },
+    { c: "え", label: "e",   meaning: "e",   strokes: 2 },
+    { c: "お", label: "o",   meaning: "o",   strokes: 3 },
+    { c: "か", label: "ka",  meaning: "ka",  strokes: 3 },
+    { c: "き", label: "ki",  meaning: "ki",  strokes: 4 },
+    { c: "く", label: "ku",  meaning: "ku",  strokes: 1 },
+    { c: "け", label: "ke",  meaning: "ke",  strokes: 3 },
+    { c: "こ", label: "ko",  meaning: "ko",  strokes: 2 },
+    { c: "さ", label: "sa",  meaning: "sa",  strokes: 3 },
+    { c: "し", label: "shi", meaning: "shi", strokes: 1 },
+    { c: "す", label: "su",  meaning: "su",  strokes: 2 },
+    { c: "せ", label: "se",  meaning: "se",  strokes: 3 },
+    { c: "そ", label: "so",  meaning: "so",  strokes: 1 },
+    { c: "た", label: "ta",  meaning: "ta",  strokes: 4 },
+    { c: "ち", label: "chi", meaning: "chi", strokes: 2 },
+    { c: "つ", label: "tsu", meaning: "tsu", strokes: 1 },
+    { c: "て", label: "te",  meaning: "te",  strokes: 1 },
+    { c: "と", label: "to",  meaning: "to",  strokes: 2 },
+    { c: "な", label: "na",  meaning: "na",  strokes: 4 },
+    { c: "に", label: "ni",  meaning: "ni",  strokes: 3 },
+    { c: "ぬ", label: "nu",  meaning: "nu",  strokes: 2 },
+    { c: "ね", label: "ne",  meaning: "ne",  strokes: 2 },
+    { c: "の", label: "no",  meaning: "no",  strokes: 1 },
+    { c: "は", label: "ha",  meaning: "ha",  strokes: 3 },
+    { c: "ひ", label: "hi",  meaning: "hi",  strokes: 2 },
+    { c: "ふ", label: "fu",  meaning: "fu",  strokes: 4 },
+    { c: "へ", label: "he",  meaning: "he",  strokes: 1 },
+    { c: "ほ", label: "ho",  meaning: "ho",  strokes: 4 },
+    { c: "ま", label: "ma",  meaning: "ma",  strokes: 3 },
+    { c: "み", label: "mi",  meaning: "mi",  strokes: 2 },
+    { c: "む", label: "mu",  meaning: "mu",  strokes: 3 },
+    { c: "め", label: "me",  meaning: "me",  strokes: 2 },
+    { c: "も", label: "mo",  meaning: "mo",  strokes: 3 },
+    { c: "や", label: "ya",  meaning: "ya",  strokes: 3 },
+    { c: "ゆ", label: "yu",  meaning: "yu",  strokes: 2 },
+    { c: "よ", label: "yo",  meaning: "yo",  strokes: 2 },
+    { c: "ら", label: "ra",  meaning: "ra",  strokes: 2 },
+    { c: "り", label: "ri",  meaning: "ri",  strokes: 2 },
+    { c: "る", label: "ru",  meaning: "ru",  strokes: 1 },
+    { c: "れ", label: "re",  meaning: "re",  strokes: 2 },
+    { c: "ろ", label: "ro",  meaning: "ro",  strokes: 1 },
+    { c: "わ", label: "wa",  meaning: "wa",  strokes: 2 },
+    { c: "を", label: "wo",  meaning: "wo",  strokes: 3 },
+    { c: "ん", label: "n",   meaning: "n",   strokes: 1 },
+  ],
+  katakana: [
+    { c: "ア", label: "a",   meaning: "a",   strokes: 2 },
+    { c: "イ", label: "i",   meaning: "i",   strokes: 2 },
+    { c: "ウ", label: "u",   meaning: "u",   strokes: 3 },
+    { c: "エ", label: "e",   meaning: "e",   strokes: 3 },
+    { c: "オ", label: "o",   meaning: "o",   strokes: 3 },
+    { c: "カ", label: "ka",  meaning: "ka",  strokes: 2 },
+    { c: "キ", label: "ki",  meaning: "ki",  strokes: 3 },
+    { c: "ク", label: "ku",  meaning: "ku",  strokes: 2 },
+    { c: "ケ", label: "ke",  meaning: "ke",  strokes: 3 },
+    { c: "コ", label: "ko",  meaning: "ko",  strokes: 2 },
+    { c: "サ", label: "sa",  meaning: "sa",  strokes: 3 },
+    { c: "シ", label: "shi", meaning: "shi", strokes: 3 },
+    { c: "ス", label: "su",  meaning: "su",  strokes: 2 },
+    { c: "セ", label: "se",  meaning: "se",  strokes: 2 },
+    { c: "ソ", label: "so",  meaning: "so",  strokes: 2 },
+    { c: "タ", label: "ta",  meaning: "ta",  strokes: 3 },
+    { c: "チ", label: "chi", meaning: "chi", strokes: 3 },
+    { c: "ツ", label: "tsu", meaning: "tsu", strokes: 3 },
+    { c: "テ", label: "te",  meaning: "te",  strokes: 3 },
+    { c: "ト", label: "to",  meaning: "to",  strokes: 2 },
+    { c: "ナ", label: "na",  meaning: "na",  strokes: 2 },
+    { c: "ニ", label: "ni",  meaning: "ni",  strokes: 3 },
+    { c: "ヌ", label: "nu",  meaning: "nu",  strokes: 2 },
+    { c: "ネ", label: "ne",  meaning: "ne",  strokes: 4 },
+    { c: "ノ", label: "no",  meaning: "no",  strokes: 1 },
+    { c: "ハ", label: "ha",  meaning: "ha",  strokes: 3 },
+    { c: "ヒ", label: "hi",  meaning: "hi",  strokes: 2 },
+    { c: "フ", label: "fu",  meaning: "fu",  strokes: 1 },
+    { c: "ヘ", label: "he",  meaning: "he",  strokes: 1 },
+    { c: "ホ", label: "ho",  meaning: "ho",  strokes: 4 },
+    { c: "マ", label: "ma",  meaning: "ma",  strokes: 2 },
+    { c: "ミ", label: "mi",  meaning: "mi",  strokes: 3 },
+    { c: "ム", label: "mu",  meaning: "mu",  strokes: 2 },
+    { c: "メ", label: "me",  meaning: "me",  strokes: 2 },
+    { c: "モ", label: "mo",  meaning: "mo",  strokes: 3 },
+    { c: "ヤ", label: "ya",  meaning: "ya",  strokes: 2 },
+    { c: "ユ", label: "yu",  meaning: "yu",  strokes: 2 },
+    { c: "ヨ", label: "yo",  meaning: "yo",  strokes: 3 },
+    { c: "ラ", label: "ra",  meaning: "ra",  strokes: 2 },
+    { c: "リ", label: "ri",  meaning: "ri",  strokes: 2 },
+    { c: "ル", label: "ru",  meaning: "ru",  strokes: 2 },
+    { c: "レ", label: "re",  meaning: "re",  strokes: 1 },
+    { c: "ロ", label: "ro",  meaning: "ro",  strokes: 3 },
+    { c: "ワ", label: "wa",  meaning: "wa",  strokes: 2 },
+    { c: "ヲ", label: "wo",  meaning: "wo",  strokes: 3 },
+    { c: "ン", label: "n",   meaning: "n",   strokes: 2 },
+  ],
+};
 
 export default function KanjiTracer() {
   const canvasRef   = useRef(null);
   const isDrawing   = useRef(false);
   const lastPos     = useRef(null);
-  const pathsRef    = useRef([]);      // array of stroke arrays
+  const pathsRef    = useRef([]);
   const currentPath = useRef([]);
 
-  const [selected, setSelected]   = useState(0);
-  const [brushSize, setBrushSize] = useState(18);
-  const [inkColor,  setInkColor]  = useState("#991b1b");
-  const [hasDrawn,  setHasDrawn]  = useState(false);
-  const [showGuide, setShowGuide] = useState(true);
+  const [activeScript, setActiveScript] = useState("kanji");
+  const [selected, setSelected]         = useState(0);
+  const [brushSize, setBrushSize]       = useState(18);
+  const [inkColor,  setInkColor]        = useState("#991b1b");
+  const [hasDrawn,  setHasDrawn]        = useState(false);
+  const [showGuide, setShowGuide]       = useState(true);
 
   const INK_COLORS = [
     { hex: "#991b1b", label: "red"   },
@@ -34,19 +140,21 @@ export default function KanjiTracer() {
     { hex: "#0a0a0a", label: "black" },
   ];
 
+  const chars = CHARACTERS[activeScript];
+  const char  = chars[selected];
+
   // ── draw guide character onto canvas ──────────────────────────────────────
-  const drawGuide = useCallback((ctx, char, show) => {
+  const drawGuide = useCallback((ctx, ch, show) => {
     const { width: w, height: h } = ctx.canvas;
     if (!show) return;
     ctx.save();
-    // Make guide character smaller and respect canvas height so it never overwhelms the area
     const base = Math.min(w, h);
-    const fontSize = Math.round(base * 0.38); // ~38% of smaller canvas dimension
+    const fontSize = Math.round(base * 0.38);
     ctx.font         = `bold ${fontSize}px 'Noto Serif JP', serif`;
     ctx.textAlign    = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle    = "rgba(255,255,255,0.06)";
-    ctx.fillText(char, w / 2, h / 2);
+    ctx.fillText(ch, w / 2, h / 2);
     ctx.restore();
   }, []);
 
@@ -59,7 +167,6 @@ export default function KanjiTracer() {
 
     ctx.clearRect(0, 0, w, h);
 
-    // subtle grid
     ctx.save();
     ctx.strokeStyle = "rgba(255,255,255,0.04)";
     ctx.lineWidth   = 1;
@@ -71,9 +178,8 @@ export default function KanjiTracer() {
     ctx.setLineDash([]);
     ctx.restore();
 
-    drawGuide(ctx, CHARACTERS[selected].c, showGuide);
+    drawGuide(ctx, chars[selected]?.c, showGuide);
 
-    // replay all saved strokes
     const allPaths = extraPath
       ? [...pathsRef.current, extraPath]
       : pathsRef.current;
@@ -97,31 +203,22 @@ export default function KanjiTracer() {
       ctx.stroke();
       ctx.restore();
     });
-  }, [selected, showGuide, drawGuide]);
+  }, [selected, showGuide, drawGuide, chars]);
 
   // ── canvas sizing ──────────────────────────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     function fit() {
-      const parentW = canvas.parentElement.clientWidth;
-      // keep full width (capped) but DO NOT make height equal to width -
-      // restore original-ish height cap so canvas stays wide but not tall.
-      const cssWidth = Math.min(parentW, 920);    // full-width cap
-      const cssHeight = Math.min(420, cssWidth);  // height capped at 420, but never bigger than width on very small screens
-
-      // set canvas pixel buffer to CSS size (keeps drawing coordinates consistent with repaint)
-      canvas.width = Math.round(cssWidth);
+      const parentW  = canvas.parentElement.clientWidth;
+      const cssWidth  = Math.min(parentW, 920);
+      const cssHeight = Math.min(420, cssWidth);
+      canvas.width  = Math.round(cssWidth);
       canvas.height = Math.round(cssHeight);
-
-      // ensure the element's CSS size matches
-      canvas.style.width = `${cssWidth}px`;
+      canvas.style.width  = `${cssWidth}px`;
       canvas.style.height = `${cssHeight}px`;
-
       repaint();
     }
-
     fit();
     window.addEventListener("resize", fit);
     return () => window.removeEventListener("resize", fit);
@@ -175,10 +272,27 @@ export default function KanjiTracer() {
     repaint();
   };
 
-  // re-render when showGuide toggles
   useEffect(() => { repaint(); }, [showGuide, repaint]);
 
-  const char = CHARACTERS[selected];
+  // When switching script tab, reset selection and clear
+  const handleScriptChange = (scriptId) => {
+    setActiveScript(scriptId);
+    setSelected(0);
+    pathsRef.current = [];
+    currentPath.current = [];
+    setHasDrawn(false);
+  };
+
+  // When switching character within same script, clear canvas
+  const handleCharSelect = (i) => {
+    setSelected(i);
+    pathsRef.current = [];
+    currentPath.current = [];
+    setHasDrawn(false);
+  };
+
+  // Determine columns based on script (hiragana/katakana have 46 chars, kanji has 10)
+  const gridCols = activeScript === "kanji" ? 10 : "auto-fill-8";
 
   return (
     <>
@@ -196,38 +310,76 @@ export default function KanjiTracer() {
           border: 1px solid rgba(185,28,28,0.35);
           color: rgba(252,165,165,0.6);
           border-radius: 2px;
-          margin-bottom: 18px;
+          margin-bottom: 14px;
         }
 
+        /* ── Script tab switcher ── */
+        .kt-tabs {
+          display: flex;
+          gap: 4px;
+          margin-bottom: 14px;
+          border-bottom: 1px solid rgba(255,255,255,0.08);
+          padding-bottom: 0;
+        }
+        .kt-tab {
+          padding: 6px 16px 8px;
+          font-size: 12px;
+          font-family: 'Outfit', sans-serif;
+          letter-spacing: 0.06em;
+          color: rgba(255,255,255,0.4);
+          background: transparent;
+          border: none;
+          border-bottom: 2px solid transparent;
+          cursor: pointer;
+          transition: all 0.15s;
+          position: relative;
+          bottom: -1px;
+        }
+        .kt-tab:hover { color: rgba(255,255,255,0.7); }
+        .kt-tab.active {
+          color: rgba(252,165,165,0.9);
+          border-bottom: 2px solid rgba(185,28,28,0.8);
+        }
+
+        /* ── Character grid ── */
         .kt-char-grid {
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
-          gap: 6px;
+          gap: 4px;
+          margin-bottom: 14px;
         }
-        @media (min-width: 500px) {
-          .kt-char-grid { grid-template-columns: repeat(10, 1fr); }
+        .kt-char-grid.kanji-grid {
+          grid-template-columns: repeat(10, 1fr);
+        }
+        .kt-char-grid.kana-grid {
+          grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+        }
+        @media (max-width: 500px) {
+          .kt-char-grid.kanji-grid { grid-template-columns: repeat(5, 1fr); }
+          .kt-char-grid.kana-grid  { grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); }
         }
 
         .kt-char-pill {
           aspect-ratio: 1;
           display: flex; align-items: center; justify-content: center;
           font-family: 'Noto Serif JP', serif;
-          font-size: 22px;
+          font-size: 18px;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 4px;
           cursor: pointer;
           color: rgba(255,255,255,0.7);
           transition: all 0.15s;
+          padding: 0;
         }
         .kt-char-pill:hover { background: rgba(127,29,29,0.4); border-color: rgba(185,28,28,0.5); color: #fff; }
         .kt-char-pill.active {
           background: rgba(127,29,29,0.55);
           border: 1px solid rgba(185,28,28,0.8);
           color: #fff;
-          box-shadow: 0 0 12px rgba(185,28,28,0.35);
+          box-shadow: 0 0 10px rgba(185,28,28,0.35);
         }
 
+        /* ── Canvas ── */
         .kt-canvas-wrap {
           position: relative;
           background: rgba(255,255,255,0.03);
@@ -236,9 +388,7 @@ export default function KanjiTracer() {
           overflow: hidden;
           display: block;
           width: 100%;
-          max-width: none; /* allow full-width inside parent column */
         }
-        /* canvas uses pixel size set in JS but scale to fill container responsively */
         .kt-canvas-wrap canvas {
           display: block;
           width: 100%;
@@ -258,6 +408,7 @@ export default function KanjiTracer() {
         .kt-corner-bl { bottom:8px; left:8px;  border-width: 0 0 1px 1px; }
         .kt-corner-br { bottom:8px; right:8px; border-width: 0 1px 1px 0; }
 
+        /* ── Controls ── */
         .kt-controls {
           display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
           margin-top: 12px;
@@ -276,6 +427,7 @@ export default function KanjiTracer() {
           transition: all 0.15s;
         }
         .kt-btn:hover { background: rgba(127,29,29,0.4); border-color: rgba(185,28,28,0.5); color: #fff; }
+        .kt-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .kt-btn.danger:hover { background: rgba(127,29,29,0.7); }
 
         .kt-swatch {
@@ -336,71 +488,90 @@ export default function KanjiTracer() {
         }
         .kt-toggle-box.on::after { transform: translateX(12px); background: #fff; }
 
+        /* ── Char info strip ── */
         .kt-char-info {
-          padding: 14px 18px;
+          padding: 12px 16px;
           background: rgba(127,29,29,0.15);
           border: 1px solid rgba(185,28,28,0.25);
           border-radius: 4px;
           display: flex; gap: 20px; align-items: center;
-          margin-bottom: 16px;
+          margin-bottom: 14px;
         }
         .kt-big-char {
           font-family: 'Noto Serif JP', serif;
-          font-size: 36px; /* reduced so the info character is smaller */
-           color: rgba(255,255,255,0.9);
-           line-height: 1;
-           text-shadow: 0 0 24px rgba(185,28,28,0.6);
-         }
+          font-size: 36px;
+          color: rgba(255,255,255,0.9);
+          line-height: 1;
+          text-shadow: 0 0 24px rgba(185,28,28,0.6);
+        }
         .kt-char-meta { display: flex; flex-direction: column; gap: 3px; }
         .kt-char-meta .reading { font-size: 15px; color: rgba(255,255,255,0.75); }
         .kt-char-meta .meaning { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; text-transform: uppercase; }
         .kt-char-meta .strokes { font-size: 11px; color: rgba(185,28,28,0.8); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
 
-        .kt-done-flash {
-          position: absolute; inset: 0;
-          display: flex; align-items: center; justify-content: center;
-          background: rgba(127,29,29,0.15);
-          font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+        /* ── Script badge ── */
+        .kt-script-badge {
+          margin-left: auto;
+          padding: 3px 10px;
+          font-size: 10px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          border-radius: 2px;
+          background: rgba(127,29,29,0.3);
+          border: 1px solid rgba(185,28,28,0.4);
           color: rgba(252,165,165,0.7);
-          pointer-events: none;
-          opacity: 0;
-          animation: flashIn 0.3s ease forwards;
-        }
-        @keyframes flashIn {
-          0%   { opacity: 0; }
-          40%  { opacity: 1; }
-          100% { opacity: 0; }
         }
       `}</style>
-<Header/>
-      <div className="kt-root">
+
+      <Header />
+      <div className="kt-root mt-4 mx-2">
         <div className="kt-section-label">文字練習 — Character Practice</div>
 
-        {/* character picker */}
-        <div className="kt-char-grid" style={{ marginBottom: 16 }}>
-          {CHARACTERS.map((ch, i) => (
+        {/* Script tab switcher */}
+        <div className="kt-tabs">
+          {SCRIPT_TABS.map((tab) => (
+            <button
+              key={tab.id}
+              className={`kt-tab ${activeScript === tab.id ? "active" : ""}`}
+              onClick={() => handleScriptChange(tab.id)}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Character picker grid */}
+        <div className={`kt-char-grid ${activeScript === "kanji" ? "kanji-grid" : "kana-grid"}`}>
+          {chars.map((ch, i) => (
             <button
               key={ch.c}
               className={`kt-char-pill ${i === selected ? "active" : ""}`}
-              onClick={() => { setSelected(i); clearCanvas(); }}
-              title={`${ch.c} — ${ch.meaning}`}
+              onClick={() => handleCharSelect(i)}
+              title={`${ch.c} — ${ch.label}`}
             >
               {ch.c}
             </button>
           ))}
         </div>
 
-        {/* char info strip */}
+        {/* Char info strip */}
         <div className="kt-char-info">
           <div className="kt-big-char">{char.c}</div>
           <div className="kt-char-meta">
-            <span className="reading">{char.c} &nbsp;·&nbsp; {char.label}</span>
-            <span className="meaning">{char.meaning}</span>
-            <span className="strokes">{char.strokes} strokes</span>
+            <span className="reading">
+              {char.c} &nbsp;·&nbsp; {char.label}
+            </span>
+            <span className="meaning">
+              {activeScript === "kanji" ? char.meaning : `sound: "${char.label}"`}
+            </span>
+            <span className="strokes">{char.strokes} stroke{char.strokes !== 1 ? "s" : ""}</span>
           </div>
+          <span className="kt-script-badge">
+            {activeScript === "kanji" ? "漢字" : activeScript === "hiragana" ? "ひらがな" : "カタカナ"}
+          </span>
         </div>
 
-        {/* canvas */}
+        {/* Canvas */}
         <div className="kt-canvas-wrap">
           <div className="kt-corner kt-corner-tl" />
           <div className="kt-corner kt-corner-tr" />
@@ -418,7 +589,7 @@ export default function KanjiTracer() {
           />
         </div>
 
-        {/* ink color swatches */}
+        {/* Ink color swatches */}
         <div className="kt-controls" style={{ marginTop: 14 }}>
           <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Ink</span>
           {INK_COLORS.map((c) => (
@@ -431,16 +602,13 @@ export default function KanjiTracer() {
             />
           ))}
           <div style={{ flex: 1 }} />
-          <label
-            className="kt-toggle"
-            onClick={() => setShowGuide((v) => !v)}
-          >
+          <label className="kt-toggle" onClick={() => setShowGuide((v) => !v)}>
             <div className={`kt-toggle-box ${showGuide ? "on" : ""}`} />
             Guide
           </label>
         </div>
 
-        {/* brush size */}
+        {/* Brush size */}
         <div className="kt-brush-row">
           <label>Brush</label>
           <input
@@ -451,13 +619,13 @@ export default function KanjiTracer() {
           <span style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", minWidth: 24 }}>{brushSize}</span>
         </div>
 
-        {/* action buttons */}
+        {/* Action buttons */}
         <div className="kt-controls" style={{ marginTop: 10 }}>
           <button className="kt-btn" onClick={undo} disabled={!hasDrawn}>↩ Undo</button>
           <button className="kt-btn danger" onClick={clearCanvas}>✕ Clear</button>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

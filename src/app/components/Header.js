@@ -3,10 +3,10 @@ import Link from "next/link";
 import React from 'react'
 
 const COURSES = [
-  { label: "Basic Japanese", href: "/courses/basic-japanese" },
+  { label: "Basic Japanese", href: "/courses/practice" },
   { label: "JLPT N5",        href: "/courses/jlpt-n5"        },
   { label: "JLPT N4",        href: "/courses/jlpt-n4"        },
-  { label: "SSW",            href: "/courses/ssw"            },
+  // { label: "SSW",            href: "/courses/ssw"            },
 ];
 
 const NAV = [
