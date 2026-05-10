@@ -458,9 +458,8 @@ export default function OhayoPage() {
           Contact Us
         </Link>
         <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs tracking-wide">
-          <span>📍 B-47, 2nd Floor Changery St., Rawalpindi</span>
-          <span>✉ info@ohayo.com.pk</span>
-          <span>📞 +92 000-0000000</span>
+          <span>✉ ohayopakistan@gmail.com</span>
+          <span>📞 +92 329-505838</span>
         </div>
       </section>
 
