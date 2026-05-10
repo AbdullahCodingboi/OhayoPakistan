@@ -204,6 +204,13 @@ const TESTIMONIALS = [
   { name: "Ali Z.",     city: "Peshawar",   text: "Best JLPT prep in Pakistan. Solid, practical, and very encouraging."     },
 ];
 
+const GALLERY_ITEMS = [
+  { label: "チーム", src: "/banner.jpeg", href: "/gallery/team" },
+  { label: "先生", src: "/images/teacher.jpg", href: "/gallery/teacher" },
+  { label: "学生", src: "/images/student.jpg", href: "/gallery/student" },
+  { label: "日本語", src: "/images/japanese.jpg", href: "/gallery/japanese" },
+];
+
 export default function OhayoPage() {
   
   const [tIdx, setTIdx] = useState(0);
@@ -237,7 +244,7 @@ export default function OhayoPage() {
             <a href="https://docs.google.com/forms/d/15aMcUMq4f8Xt98LAMRA0tE3D9mmAC2KXSIyAQE5NuEM/viewform?edit_requested=true" target="_blank" className="px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white text-xs font-black tracking-[0.2em] uppercase rounded transition-all hover:shadow-lg hover:shadow-red-600/30">
               Get Admission
             </a>
-            <Link href={"/courses"} className="px-8 py-3.5 border border-white/10 hover:border-white/30 text-white/85 hover:text-white text-xs font-bold tracking-[0.2em] uppercase rounded transition-all">
+            <Link href={"/Courses"} className="px-8 py-3.5 border border-white/10 hover:border-white/30 text-white/85 hover:text-white text-xs font-bold tracking-[0.2em] uppercase rounded transition-all">
               Our Courses
             </Link>
           </div>
@@ -258,7 +265,7 @@ export default function OhayoPage() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="relative z-10 border-y border-white/5 px-6 sm:px-12 lg:px-20 py-16">
+      {/* <section className="relative z-10 border-y border-white/5 px-6 sm:px-12 lg:px-20 py-16">
         <p className="text-white/40 text-xs tracking-[0.4em] uppercase mb-10 text-center">なぜ OHAYO？</p>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-2xl overflow-hidden">
           {STATS.map(s => (
@@ -269,7 +276,7 @@ export default function OhayoPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
       {/* ── FREE COURSE BANNER ── */}
       <section className="relative z-10 px-6 sm:px-12 lg:px-20 py-16">
@@ -292,25 +299,25 @@ export default function OhayoPage() {
 
       {/* ── ABOUT ── */}
       <section className="relative z-10 px-6 sm:px-12 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-      <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
-  {[
-    { label: "チーム", src: "/banner.jpeg" },
-    { label: "先生", src: "/images/teacher.jpg" },
-    { label: "学生", src: "/images/student.jpg" },
-    { label: "日本語", src: "/images/japanese.jpg" },
-  ].map(({ label, src }, i) => (
-    <div
-      key={label}
-      className={`${i === 0 ? "col-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] overflow-hidden`}
-    >
-      <img
-        src={src}
-        alt={label}
-        className="w-full h-full object-cover"
-      />
-    </div>
-  ))}
-</div>
+        <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
+          {[
+            { label: "チーム", src: "/banner.jpeg" },
+            { label: "先生", src: "/images/teacher.jpg" },
+            { label: "学生", src: "/images/student.jpg" },
+            { label: "日本語", src: "/images/japanese.jpg" },
+          ].map(({ label, src }, i) => (
+            <div
+              key={label}
+              className={`${i === 0 ? "col-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] overflow-hidden`}
+            >
+              <img
+                src={src}
+                alt={label}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
+        </div>
 
         <div className="order-1 lg:order-2">
           <p className="text-red-600 text-xs tracking-[0.5em] uppercase mb-4">About Us</p>
@@ -363,14 +370,19 @@ export default function OhayoPage() {
             View All →
           </a>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {["写", "真", "学", "習", "日", "本", "語", "校"].map((k, i) => (
-            <div
-              key={k}
-              className={`${i === 0 ? "col-span-2 row-span-2" : ""} aspect-square rounded-xl bg-white/[0.03] border border-white/[0.05] hover:border-red-600/30 transition-all flex items-center justify-center group cursor-pointer`}
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {GALLERY_ITEMS.map((g, i) => (
+            <Link
+              key={g.label}
+              href={g.href}
+              className={`${i === 0 ? "col-span-2 row-span-2 lg:col-span-2 lg:row-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] overflow-hidden hover:border-red-600/30 transition-all group`}
             >
-              <span className="text-white/[0.18] group-hover:text-white/[0.30] transition-colors font-black text-4xl select-none">{k}</span>
-            </div>
+              <img src={g.src} alt={g.label} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 flex items-end p-4 pointer-events-none">
+                <span className="text-white/90 font-black text-sm bg-black/30 px-2 py-1 rounded select-none">{g.label}</span>
+              </div>
+            </Link>
           ))}
         </div>
       </section>

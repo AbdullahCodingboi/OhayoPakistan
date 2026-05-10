@@ -270,9 +270,9 @@ const Footer = () => {
               lineHeight: 2,
             }}
           >
-            <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div>
-            <div>✉ info@ohayo.com.pk</div>
-            <div>📞 +92 000-0000000</div>
+            {/* <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div> */}
+            <div>✉ ohayopakistan@gmail.com</div>
+            <div>📞 +92 329-505838</div>
           </div>
         </div>
       </div>

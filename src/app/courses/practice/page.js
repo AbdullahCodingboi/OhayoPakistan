@@ -9,6 +9,27 @@ const SCRIPT_TABS = [
   { id: "katakana", label: "カタカナ Katakana" },
 ];
 
+const SCRIPT_DESCRIPTIONS = {
+  kanji: {
+    title: "漢字 · Kanji",
+    desc: "Kanji are logographic characters adopted from Chinese, each carrying its own meaning and one or more readings. They form the backbone of written Japanese — nouns, verb stems, and adjectives are typically written in kanji. There are around 2,000 characters in everyday use, but mastering even a few dozen opens up the written language significantly.",
+    tip: "Tip: stroke order matters — writing kanji in the correct sequence helps build muscle memory and improves legibility.",
+    accent: "#ef4444",
+  },
+  hiragana: {
+    title: "ひらがな · Hiragana",
+    desc: "Hiragana is the foundational syllabic alphabet of Japanese, consisting of 46 characters each representing a distinct sound. It's the first script children learn and is used for grammatical endings, function words, and words without kanji. Mastering hiragana is the essential first step on any Japanese learning journey.",
+    tip: "Tip: hiragana strokes tend to be curved and flowing — let your brush move naturally and avoid sharp angles.",
+    accent: "#3b82f6",
+  },
+  katakana: {
+    title: "カタカナ · Katakana",
+    desc: "Katakana mirrors hiragana in sound but is used for foreign loanwords, onomatopoeia, scientific terms, and stylistic emphasis. Its 46 characters are angular and crisp compared to hiragana's curves. You'll see katakana everywhere — from menus to tech products to manga sound effects.",
+    tip: "Tip: katakana strokes are sharper and more geometric — focus on clean, decisive lines and precise angles.",
+    accent: "#10b981",
+  },
+};
+
 const CHARACTERS = {
   kanji: [
     { c: "日", label: "nichi / hi", meaning: "sun / day",  strokes: 4 },
@@ -142,6 +163,7 @@ export default function KanjiTracer() {
 
   const chars = CHARACTERS[activeScript];
   const char  = chars[selected];
+  const scriptInfo = SCRIPT_DESCRIPTIONS[activeScript];
 
   // ── draw guide character onto canvas ──────────────────────────────────────
   const drawGuide = useCallback((ctx, ch, show) => {
@@ -274,7 +296,6 @@ export default function KanjiTracer() {
 
   useEffect(() => { repaint(); }, [showGuide, repaint]);
 
-  // When switching script tab, reset selection and clear
   const handleScriptChange = (scriptId) => {
     setActiveScript(scriptId);
     setSelected(0);
@@ -283,7 +304,6 @@ export default function KanjiTracer() {
     setHasDrawn(false);
   };
 
-  // When switching character within same script, clear canvas
   const handleCharSelect = (i) => {
     setSelected(i);
     pathsRef.current = [];
@@ -291,15 +311,19 @@ export default function KanjiTracer() {
     setHasDrawn(false);
   };
 
-  // Determine columns based on script (hiragana/katakana have 46 chars, kanji has 10)
-  const gridCols = activeScript === "kanji" ? 10 : "auto-fill-8";
-
   return (
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&family=Outfit:wght@300;400;600;700&display=swap');
 
-        .kt-root { font-family: 'Outfit', sans-serif; }
+        * { box-sizing: border-box; }
+
+        .kt-root {
+          font-family: 'Outfit', sans-serif;
+          padding: 0 12px;
+          max-width: 100vw;
+          overflow-x: hidden;
+        }
 
         .kt-section-label {
           display: inline-block;
@@ -313,16 +337,53 @@ export default function KanjiTracer() {
           margin-bottom: 14px;
         }
 
+        /* ── Script description block ── */
+        .kt-script-desc {
+          margin-bottom: 16px;
+          padding: 14px 16px;
+          background: rgba(255,255,255,0.025);
+          border-left: 2px solid var(--kt-accent, rgba(185,28,28,0.7));
+          border-radius: 0 4px 4px 0;
+          animation: kt-fade-in 0.3s ease;
+        }
+        @keyframes kt-fade-in {
+          from { opacity: 0; transform: translateY(-4px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .kt-script-desc h3 {
+          font-size: 13px;
+          font-weight: 600;
+          color: rgba(255,255,255,0.8);
+          margin: 0 0 6px 0;
+          letter-spacing: 0.04em;
+        }
+        .kt-script-desc p {
+          font-size: 12px;
+          line-height: 1.65;
+          color: rgba(255,255,255,0.42);
+          margin: 0 0 8px 0;
+        }
+        .kt-script-desc .kt-tip {
+          font-size: 11px;
+          color: var(--kt-accent-soft, rgba(252,165,165,0.55));
+          font-style: italic;
+          letter-spacing: 0.02em;
+        }
+
         /* ── Script tab switcher ── */
         .kt-tabs {
           display: flex;
-          gap: 4px;
+          gap: 0;
           margin-bottom: 14px;
           border-bottom: 1px solid rgba(255,255,255,0.08);
           padding-bottom: 0;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
         }
+        .kt-tabs::-webkit-scrollbar { display: none; }
         .kt-tab {
-          padding: 6px 16px 8px;
+          padding: 6px 14px 8px;
           font-size: 12px;
           font-family: 'Outfit', sans-serif;
           letter-spacing: 0.06em;
@@ -334,6 +395,8 @@ export default function KanjiTracer() {
           transition: all 0.15s;
           position: relative;
           bottom: -1px;
+          white-space: nowrap;
+          flex-shrink: 0;
         }
         .kt-tab:hover { color: rgba(255,255,255,0.7); }
         .kt-tab.active {
@@ -346,23 +409,25 @@ export default function KanjiTracer() {
           display: grid;
           gap: 4px;
           margin-bottom: 14px;
+          width: 100%;
         }
         .kt-char-grid.kanji-grid {
           grid-template-columns: repeat(10, 1fr);
         }
         .kt-char-grid.kana-grid {
-          grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
         }
-        @media (max-width: 500px) {
+        @media (max-width: 480px) {
           .kt-char-grid.kanji-grid { grid-template-columns: repeat(5, 1fr); }
-          .kt-char-grid.kana-grid  { grid-template-columns: repeat(auto-fill, minmax(32px, 1fr)); }
+          .kt-char-grid.kana-grid  { grid-template-columns: repeat(auto-fill, minmax(30px, 1fr)); }
+          .kt-char-pill { font-size: 15px; }
         }
 
         .kt-char-pill {
           aspect-ratio: 1;
           display: flex; align-items: center; justify-content: center;
           font-family: 'Noto Serif JP', serif;
-          font-size: 18px;
+          font-size: 17px;
           background: rgba(255,255,255,0.04);
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 4px;
@@ -370,6 +435,7 @@ export default function KanjiTracer() {
           color: rgba(255,255,255,0.7);
           transition: all 0.15s;
           padding: 0;
+          min-width: 0;
         }
         .kt-char-pill:hover { background: rgba(127,29,29,0.4); border-color: rgba(185,28,28,0.5); color: #fff; }
         .kt-char-pill.active {
@@ -410,12 +476,15 @@ export default function KanjiTracer() {
 
         /* ── Controls ── */
         .kt-controls {
-          display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+          display: flex;
+          gap: 8px;
+          align-items: center;
+          flex-wrap: wrap;
           margin-top: 12px;
         }
 
         .kt-btn {
-          padding: 6px 14px;
+          padding: 7px 14px;
           font-size: 12px;
           font-family: 'Outfit', sans-serif;
           letter-spacing: 0.05em;
@@ -425,17 +494,21 @@ export default function KanjiTracer() {
           border-radius: 3px;
           cursor: pointer;
           transition: all 0.15s;
+          touch-action: manipulation;
+          min-height: 34px;
         }
         .kt-btn:hover { background: rgba(127,29,29,0.4); border-color: rgba(185,28,28,0.5); color: #fff; }
         .kt-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .kt-btn.danger:hover { background: rgba(127,29,29,0.7); }
 
         .kt-swatch {
-          width: 26px; height: 26px;
+          width: 28px; height: 28px;
           border-radius: 50%;
           border: 2px solid transparent;
           cursor: pointer;
           transition: transform 0.12s, border-color 0.12s;
+          touch-action: manipulation;
+          flex-shrink: 0;
         }
         .kt-swatch:hover { transform: scale(1.15); }
         .kt-swatch.active { border-color: rgba(255,255,255,0.8); transform: scale(1.1); }
@@ -443,8 +516,16 @@ export default function KanjiTracer() {
         .kt-brush-row {
           display: flex; align-items: center; gap: 10px;
           margin-top: 10px;
+          width: 100%;
         }
-        .kt-brush-row label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+        .kt-brush-row label {
+          font-size: 11px;
+          color: rgba(255,255,255,0.35);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
         .kt-brush-row input[type=range] {
           -webkit-appearance: none;
           height: 2px;
@@ -453,10 +534,11 @@ export default function KanjiTracer() {
           outline: none;
           flex: 1;
           cursor: pointer;
+          min-width: 0;
         }
         .kt-brush-row input[type=range]::-webkit-slider-thumb {
           -webkit-appearance: none;
-          width: 14px; height: 14px;
+          width: 18px; height: 18px;
           border-radius: 50%;
           background: #991b1b;
           border: 2px solid rgba(255,255,255,0.4);
@@ -468,6 +550,8 @@ export default function KanjiTracer() {
           font-size: 11px; color: rgba(255,255,255,0.35);
           letter-spacing: 0.06em; text-transform: uppercase;
           cursor: pointer; user-select: none;
+          touch-action: manipulation;
+          flex-shrink: 0;
         }
         .kt-toggle-box {
           width: 28px; height: 16px;
@@ -475,6 +559,7 @@ export default function KanjiTracer() {
           border: 1px solid rgba(185,28,28,0.5);
           background: rgba(0,0,0,0.3);
           position: relative; transition: background 0.2s;
+          flex-shrink: 0;
         }
         .kt-toggle-box.on { background: rgba(127,29,29,0.7); }
         .kt-toggle-box::after {
@@ -490,24 +575,55 @@ export default function KanjiTracer() {
 
         /* ── Char info strip ── */
         .kt-char-info {
-          padding: 12px 16px;
+          padding: 10px 14px;
           background: rgba(127,29,29,0.15);
           border: 1px solid rgba(185,28,28,0.25);
           border-radius: 4px;
-          display: flex; gap: 20px; align-items: center;
+          display: flex;
+          gap: 14px;
+          align-items: center;
           margin-bottom: 14px;
+          flex-wrap: wrap;
+          min-width: 0;
         }
         .kt-big-char {
           font-family: 'Noto Serif JP', serif;
-          font-size: 36px;
+          font-size: 34px;
           color: rgba(255,255,255,0.9);
           line-height: 1;
           text-shadow: 0 0 24px rgba(185,28,28,0.6);
+          flex-shrink: 0;
         }
-        .kt-char-meta { display: flex; flex-direction: column; gap: 3px; }
-        .kt-char-meta .reading { font-size: 15px; color: rgba(255,255,255,0.75); }
-        .kt-char-meta .meaning { font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em; text-transform: uppercase; }
-        .kt-char-meta .strokes { font-size: 11px; color: rgba(185,28,28,0.8); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+        .kt-char-meta {
+          display: flex;
+          flex-direction: column;
+          gap: 3px;
+          min-width: 0;
+          flex: 1;
+        }
+        .kt-char-meta .reading {
+          font-size: 14px;
+          color: rgba(255,255,255,0.75);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .kt-char-meta .meaning {
+          font-size: 11px;
+          color: rgba(255,255,255,0.4);
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .kt-char-meta .strokes {
+          font-size: 11px;
+          color: rgba(185,28,28,0.8);
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-top: 2px;
+        }
 
         /* ── Script badge ── */
         .kt-script-badge {
@@ -520,11 +636,25 @@ export default function KanjiTracer() {
           background: rgba(127,29,29,0.3);
           border: 1px solid rgba(185,28,28,0.4);
           color: rgba(252,165,165,0.7);
+          white-space: nowrap;
+          flex-shrink: 0;
+          align-self: flex-start;
+        }
+
+        /* ── Footer safety ── */
+        .kt-footer-spacer {
+          height: 24px;
+        }
+
+        @media (max-width: 360px) {
+          .kt-script-badge { display: none; }
+          .kt-big-char { font-size: 28px; }
+          .kt-tab { padding: 6px 10px 8px; font-size: 11px; }
         }
       `}</style>
 
       <Header />
-      <div className="kt-root mt-4 mx-2">
+      <div className="kt-root mt-4">
         <div className="kt-section-label">文字練習 — Character Practice</div>
 
         {/* Script tab switcher */}
@@ -538,6 +668,19 @@ export default function KanjiTracer() {
               {tab.label}
             </button>
           ))}
+        </div>
+
+        {/* Script description */}
+        <div
+          className="kt-script-desc"
+          style={{
+            "--kt-accent": scriptInfo.accent,
+            "--kt-accent-soft": scriptInfo.accent + "99",
+          }}
+        >
+          <h3>{scriptInfo.title}</h3>
+          <p>{scriptInfo.desc}</p>
+          <span className="kt-tip">{scriptInfo.tip}</span>
         </div>
 
         {/* Character picker grid */}
@@ -620,12 +763,14 @@ export default function KanjiTracer() {
         </div>
 
         {/* Action buttons */}
-        <div className="kt-controls" style={{ marginTop: 10 }}>
+        <div className="kt-controls" style={{ marginTop: 10, marginBottom: 0 }}>
           <button className="kt-btn" onClick={undo} disabled={!hasDrawn}>↩ Undo</button>
           <button className="kt-btn danger" onClick={clearCanvas}>✕ Clear</button>
         </div>
+
+        <div className="kt-footer-spacer" />
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

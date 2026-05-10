@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 // ── Floating kanji background ────────────────────────────────────────────────
 const HERO_CHARS = [
   { c: "語", x: 5,  y: 10, size: 60, dur: 7,   delay: 0    },
@@ -285,6 +286,7 @@ export default function CoursesPage() {
       >
 
         {/* ── Hero Section ── */}
+        <Header/>
         <section
           className="relative z-10 overflow-hidden"
           style={{
@@ -473,6 +475,7 @@ export default function CoursesPage() {
         {/* bottom spacing */}
         <div className="h-20" />
       </div>
+      <Footer/>
     </>
   );
 }
