@@ -9,7 +9,7 @@ const INITIAL_FOOTER_LINKS = [
 const INITIAL_FOOTER_COURSES = [
   { label: "JLPT N5", href: "/courses/jlpt-n5" },
   { label: "JLPT N4", href: "/courses/jlpt-n4" },
-  { label: "SSW", href: "/courses/ssw" },
+  // { label: "SSW", href: "/courses/ssw" },
   { label: "Basic Japanese", href: "/courses/basic-japanese" },
 ];
 

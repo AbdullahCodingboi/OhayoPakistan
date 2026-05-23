@@ -130,7 +130,9 @@ const COURSES = [
     details: [
       { label: "Course Duration", value: "4 Weeks" },
       { label: "Categories", value: "Driver, Building Cleaning, Agriculture, Construction." },
+      
     ],
+     badge: "Coming Soon",
   },
 ];
 
@@ -259,21 +261,21 @@ export default function AdmissionsPage() {
             </div>
 
             {/* Right — decorative image slot */}
-            <div className="hidden md:flex items-center justify-center fu fu3">
+            {/* <div className="hidden md:flex items-center justify-center fu fu3">
               <div className="relative w-64 h-52 rounded-sm overflow-hidden"
                 style={{
                   background:"rgba(0,0,0,0.25)",
                   border:"1px solid rgba(255,255,255,0.1)",
                 }}>
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+                {/* <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
                   <svg className="w-8 h-8 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
                     <path strokeLinecap="round" strokeLinejoin="round"
                       d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18M3.75 3h16.5A.75.75 0 0121 3.75v13.5A.75.75 0 0120.25 18H3.75A.75.75 0 013 17.25V3.75A.75.75 0 013.75 3z" />
                   </svg>
                   <span className="text-white/20 text-xs tracking-widest uppercase">Hero Image</span>
-                </div>
+                </div> 
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
 
@@ -293,83 +295,37 @@ export default function AdmissionsPage() {
         </section>
 
         {/* ── Admission Form ── */}
-        <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-
-            {/* Left — image slot */}
-            <div className="relative rounded-sm overflow-hidden"
-              style={{ minHeight:460, background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)" }}>
-              {/* top-left label */}
-              <div className="absolute top-5 left-5 z-10">
-                <p className="text-white font-bold text-2xl leading-tight" style={{ fontFamily:"'Bebas Neue',sans-serif", letterSpacing:"0.04em" }}>
-                  start<br />learning
-                </p>
-              </div>
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-                <svg className="w-9 h-9 opacity-15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18M3.75 3h16.5A.75.75 0 0121 3.75v13.5A.75.75 0 0120.25 18H3.75A.75.75 0 013 17.25V3.75A.75.75 0 013.75 3z" />
-                </svg>
-                <span className="text-white/15 text-xs tracking-widest uppercase">Promo Image</span>
-              </div>
-              {/* decorative "JAPANESE" text overlay */}
-              <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
-                <span className="text-5xl font-black tracking-widest"
-                  style={{ color:"rgba(153,27,27,0.25)", fontFamily:"'Bebas Neue',sans-serif", letterSpacing:"0.15em" }}>
-                  JAPANESE
-                </span>
-              </div>
-            </div>
-
-            {/* Right — form */}
-            <div>
-              <p className="text-xs uppercase tracking-widest text-red-500/70 mb-2">入学フォーム</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-8" style={{ letterSpacing:"-0.02em" }}>
-                Admission Form
-              </h2>
-
-              <div className="space-y-3">
-                <FInput placeholder="Your Full Name ?" />
-                <FInput type="email" placeholder="Your Email ?" />
-                <FInput type="tel" placeholder="Your Phone Number ?" />
-                <FInput placeholder="Your City ?" />
-
-                <FSelect placeholder="Select a Course" options={[
-                  "JLPT N5 & N4","JLCT N4 & N5","JFT Basic","SSW Skill Test"
-                ]} />
-
-                <FSelect placeholder="How you'll attend classes?" options={[
-                  "Online","In-Person","Hybrid"
-                ]} />
-
-                <FSelect placeholder="Select Your Education Level" options={[
-                  "Matriculation","Intermediate","Bachelors","Masters","Other"
-                ]} />
-
-                <FSelect placeholder="Previous Japanese Language Experience" options={[
-                  "None","Beginner (N5)","Elementary (N4)","Intermediate (N3)","Advanced"
-                ]} />
-
-                <textarea
-                  className={inputCls}
-                  placeholder="Any questions in your mind...?"
-                  rows={4}
-                />
-
-                <button
-                  className="w-full py-3.5 text-sm font-semibold tracking-widest uppercase text-white rounded-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
-                  style={{
-                    background:"linear-gradient(135deg,#b91c1c,#7f1d1d)",
-                    border:"1px solid rgba(185,28,28,0.5)",
-                    letterSpacing:"0.1em",
-                  }}
-                >
-                  Submit Application →
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
+       <section className="relative z-10 max-w-5xl mx-auto px-6 pb-20">
+  <div className="relative rounded-sm overflow-hidden"
+    style={{ minHeight:460, background:"rgba(255,255,255,0.03)", border:"1px solid rgba(255,255,255,0.08)" }}>
+    <div className="absolute top-5 left-5 z-10">
+      <p className="text-white font-bold text-2xl leading-tight" style={{ fontFamily:"'Bebas Neue',sans-serif", letterSpacing:"0.04em" }}>
+        start<br />learning
+      </p>
+    </div>
+    <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+      
+        <a href="https://docs.google.com/forms/d/15aMcUMq4f8Xt98LAMRA0tE3D9mmAC2KXSIyAQE5NuEM/viewform?edit_requested=true"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-3 py-4 px-10 text-sm font-semibold uppercase text-white rounded-sm transition-all duration-200 hover:brightness-110 active:scale-[0.98]"
+        style={{
+          background:"linear-gradient(135deg,#b91c1c,#7f1d1d)",
+          border:"1px solid rgba(185,28,28,0.5)",
+          letterSpacing:"0.1em",
+        }}
+      >
+        Get Admission Now →
+      </a>
+    </div>
+    <div className="absolute bottom-6 left-4 right-4 text-center pointer-events-none">
+      <span className="text-5xl font-black tracking-widest"
+        style={{ color:"rgba(153,27,27,0.25)", fontFamily:"'Bebas Neue',sans-serif", letterSpacing:"0.15em" }}>
+        JAPANESE
+      </span>
+    </div>
+  </div>
+</section>
 
         {/* ── Footer placeholder ── */}
         <Footer />

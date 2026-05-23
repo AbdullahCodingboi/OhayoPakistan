@@ -100,17 +100,21 @@ export default function OhayoAboutPage() {
         }}>
           {/* Inner image area */}
           <div style={{
-            width: "78%", height: "72%",
-            borderRadius: "0 999px 999px 0",
-            background: "#1c1c1c",
-            border: "1px dashed rgba(255,255,255,0.1)",
-            display: "flex", flexDirection: "column",
-            alignItems: "center", justifyContent: "center",
-            gap: 10, color: "rgba(255,255,255,0.2)",
-          }}>
-            <div style={{ fontSize: 48 }}>🖼</div>
-            <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase" }}>Team Photo</div>
-          </div>
+  width: "78%", height: "72%",
+  borderRadius: "0 999px 999px 0",
+  background: "#0d0000",
+  border: "1px solid rgba(192,0,28,0.2)",
+  display: "flex", flexDirection: "column",
+  alignItems: "center", justifyContent: "center",
+  gap: 4,
+}}>
+  {["学", "ぶ", "日", "本", "語"].map((k, i) => (
+    <span key={i} style={{
+      fontSize: 38, fontFamily: "serif", lineHeight: 1.2,
+      color: i % 2 === 0 ? "rgba(192,0,28,0.7)" : "rgba(255,255,255,0.08)",
+    }}>{k}</span>
+  ))}
+</div>
 
           {/* こんにちは badge */}
           <div style={{

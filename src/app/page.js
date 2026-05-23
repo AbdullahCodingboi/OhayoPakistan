@@ -60,17 +60,17 @@ const BG_CHARS = [
 
 const SLIDES = [
   {
-    img: "/images/hero-student.jpg",
+    img: "/male_seated.png",
     label: "Start Your Preparation For JLPT N5 Level To Study In Japan",
     badge: "JLPT - N5",
   },
   {
-    img: "/images/hero-female.jpg",
+    img: "/man_walking.png",
     label: "Certified Sensei With Years of JLPT Coaching Experience",
     badge: "Expert Guidance",
   },
   {
-    img: "/images/hero-worker.jpg",
+    img: "/man_working.png",
     label: "SSW Certification & Work Opportunities in Japan",
     badge: "SSW Cert",
   },
@@ -205,10 +205,10 @@ const TESTIMONIALS = [
 ];
 
 const GALLERY_ITEMS = [
-  { label: "チーム", src: "/banner.jpeg", href: "/gallery/team" },
-  { label: "先生", src: "/images/teacher.jpg", href: "/gallery/teacher" },
-  { label: "学生", src: "/images/student.jpg", href: "/gallery/student" },
-  { label: "日本語", src: "/images/japanese.jpg", href: "/gallery/japanese" },
+  { label: "チーム", src: "/banner.jpeg", href: "/banner.jpeg" },
+  { label: "先生", src: "/white_logo.jpeg", href: "/white_logo.jpeg" },
+  { label: "学生", src: "/poster5.jpeg", href: "/poster5.jpeg" },
+  // { label: "日本語", src: "/images/japanese.jpg", href: "/gallery/japanese" },
 ];
 
 export default function OhayoPage() {
@@ -299,25 +299,24 @@ export default function OhayoPage() {
 
       {/* ── ABOUT ── */}
       <section className="relative z-10 px-6 sm:px-12 lg:px-20 py-20 grid lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
-          {[
-            { label: "チーム", src: "/banner.jpeg" },
-            { label: "先生", src: "/images/teacher.jpg" },
-            { label: "学生", src: "/images/student.jpg" },
-            { label: "日本語", src: "/images/japanese.jpg" },
-          ].map(({ label, src }, i) => (
-            <div
-              key={label}
-              className={`${i === 0 ? "col-span-2" : ""} aspect-video rounded-xl bg-white/[0.03] border border-white/[0.05] overflow-hidden`}
-            >
-              <img
-                src={src}
-                alt={label}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-        </div>
+       <div className="order-2 lg:order-1 grid grid-cols-2 gap-3">
+  {[
+    { label: "チーム", src: "/poster2.jpeg" },
+    { label: "先生", src: "/poster1.jpeg" },
+    { label: "学生", src: "/poster4.jpeg" },
+  ].map(({ label, src }, i) => (
+    <div
+      key={label}
+      className={`${i === 0 ? "col-span-2" : ""} rounded-xl  border border-white/[0.05] overflow-hidden`}
+    >
+      <img
+        src={src}
+        alt={label}
+        className="w-full h-auto block"
+      />
+    </div>
+  ))}
+</div>
 
         <div className="order-1 lg:order-2">
           <p className="text-red-600 text-xs tracking-[0.5em] uppercase mb-4">About Us</p>
