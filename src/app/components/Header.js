@@ -35,11 +35,11 @@ const Header = () => {
   }, []);
 
   return (
-    <nav className="relative z-50 flex items-center justify-between px-6 sm:px-12 lg:px-20 h-24 border-b border-white/5">
+    <nav className="relative z-50 flex items-center justify-between px-6 sm:px-12 lg:px-22 h-28 border-b bg-black border-white/5">
       <Link href="/" className="flex items-center">
         <img
-          className="w-28 h-28 rounded-full flex items-center justify-center mt-2 "
-          src="/logo.svg"
+          className="w-26 h-26 rounded-full flex items-center justify-center mt-2 "
+          src="/black_logo.jpeg"
         />
       </Link>
 

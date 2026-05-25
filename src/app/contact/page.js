@@ -284,7 +284,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right — Send a message */}
-          <div className="fade-up fade-up-2">
+          {/* <div className="fade-up fade-up-2">
             <h2 className="text-2xl font-semibold text-white mb-8" style={{ letterSpacing: "-0.01em" }}>
               Send a Message
             </h2>
@@ -300,7 +300,7 @@ export default function ContactPage() {
                 Send Message →
               </button>
             </div>
-          </div>
+          </div> */}
         </section>
 
         {/* ── Footer ── */}
