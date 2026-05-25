@@ -1,7 +1,8 @@
 "use client";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-// ── Cloud + BG (same as ContactPage) ──────────────────────────────────────────
+
+// ── Cloud + BG ─────────────────────────────────────────────────────────────────
 function Cloud({ x, y, scale = 1, opacity = 0.25, rotate = 0 }) {
   return (
     <svg
@@ -52,7 +53,6 @@ const BG_CHARS = [
   { c: "出", left: "74%", top: "78%", size: 115, opacity: 0.035, rotate: -9 },
 ];
 
-// Floating kanji for the hero — unique keyframe per char
 const HERO_CHARS = [
   { c: "写", x: 10,  y: 20,  size: 50, dur: 7,   delay: 0    },
   { c: "真", x: 78,  y: 14,  size: 44, dur: 8.5, delay: 1.3  },
@@ -109,37 +109,24 @@ function CloudBg() {
   );
 }
 
-// ── Empty image placeholder ────────────────────────────────────────────────────
-function ImgSlot({ aspect = "aspect-video", label = "" }) {
+// ── Gallery image component ────────────────────────────────────────────────────
+function GalleryImg({ src = "", aspect = "aspect-video", alt = "" }) {
   return (
     <div
-      className={`relative w-full ${aspect} overflow-hidden rounded-sm`}
-      style={{
-        background: "linear-gradient(135deg, #1a1a1a 0%, #111 100%)",
-        border: "1px solid rgba(255,255,255,0.07)",
-      }}
+      className={`img-slot relative w-full ${aspect} overflow-hidden rounded-sm`}
+      style={{ border: "1px solid rgba(255,255,255,0.07)" }}
     >
-      {/* subtle red corner accent */}
-      <div className="absolute top-0 left-0 w-8 h-8"
-        style={{ background: "linear-gradient(135deg, rgba(153,27,27,0.5) 0%, transparent 70%)" }} />
-      <div className="absolute bottom-0 right-0 w-8 h-8"
-        style={{ background: "linear-gradient(315deg, rgba(153,27,27,0.3) 0%, transparent 70%)" }} />
-
-      {/* grid lines */}
-      <div className="absolute inset-0 opacity-10"
-        style={{
-          backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,0.15) 39px,rgba(255,255,255,0.15) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(255,255,255,0.15) 39px,rgba(255,255,255,0.15) 40px)",
-        }}
+      <img
+        src={src}
+        alt={alt}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out"
+        onMouseEnter={e => e.currentTarget.style.transform = "scale(1.04)"}
+        onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
       />
-
-      {/* centre icon */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
-        <svg className="w-7 h-7 opacity-20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-          <path strokeLinecap="round" strokeLinejoin="round"
-            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3 20.25h18M3.75 3h16.5A.75.75 0 0121 3.75v13.5A.75.75 0 0120.25 18H3.75A.75.75 0 013 17.25V3.75A.75.75 0 013.75 3z" />
-        </svg>
-        {label && <span className="text-white/20 text-xs tracking-widest uppercase">{label}</span>}
-      </div>
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: "radial-gradient(ellipse at center, transparent 60%, rgba(127,29,29,0.25) 100%)" }}
+      />
     </div>
   );
 }
@@ -216,65 +203,52 @@ export default function GalleryPage() {
         {/* ── Gallery body ── */}
         <main className="relative z-10 max-w-5xl mx-auto px-6 py-14 space-y-6">
 
-          {/* Row 1 — hero duo: tall left + wide right */}
+          {/* Row 1 — tall left + wide right */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="col-span-1 img-slot">
-              <ImgSlot aspect="aspect-[3/4]" label="Feature" />
+            <div className="col-span-1">
+              <GalleryImg aspect="aspect-[3/4]" src="./poster1.jpeg" alt="" />
             </div>
-            <div className="col-span-2 img-slot">
-              <ImgSlot aspect="aspect-[16/9]" label="Hero" />
+            <div className="col-span-2">
+              <GalleryImg aspect="aspect-[16/9]" src="./poster2.jpeg" alt="" />
             </div>
           </div>
 
-          {/* Row 2 — three equal */}
+          {/* Row 2 — three squares */}
           <div className="grid grid-cols-3 gap-3">
-            {[1,2,3].map(i => (
-              <div key={i} className="img-slot">
-                <ImgSlot aspect="aspect-square" />
-              </div>
-            ))}
+            <GalleryImg aspect="aspect-square" src="./poster3.jpeg" alt="" />
+            <GalleryImg aspect="aspect-square" src="./poster4.jpeg" alt="" />
+            <GalleryImg aspect="aspect-square" src="./poster5.jpeg" alt="" />
           </div>
 
-          {/* Row 3 — three equal landscape */}
-          <div className="grid grid-cols-3 gap-3">
-            {[1,2,3].map(i => (
-              <div key={i} className="img-slot">
-                <ImgSlot aspect="aspect-video" />
-              </div>
-            ))}
-          </div>
+          {/* Row 3 — three landscape */}
+          {/* <div className="grid grid-cols-3 gap-3">
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+          </div> */}
 
           {/* Row 4 — two wide */}
           <div className="grid grid-cols-2 gap-3">
-            {[1,2].map(i => (
-              <div key={i} className="img-slot">
-                <ImgSlot aspect="aspect-video" />
-              </div>
-            ))}
+            <GalleryImg aspect="aspect-video" src="./poster6.jpeg" alt="" />
+            <GalleryImg aspect="aspect-video" src="./banner.jpeg" alt="" />
           </div>
 
-          {/* Row 5 — three equal */}
-          <div className="grid grid-cols-3 gap-3">
-            {[1,2,3].map(i => (
-              <div key={i} className="img-slot">
-                <ImgSlot aspect="aspect-video" />
-              </div>
-            ))}
+          {/* Row 5 — three landscape */}
+          {/* <div className="grid grid-cols-3 gap-3">
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+            <GalleryImg aspect="aspect-video" src="" alt="" />
           </div>
 
-          {/* Row 6 — two equal */}
+         
           <div className="grid grid-cols-3 gap-3">
-            {[1,2].map(i => (
-              <div key={i} className="img-slot">
-                <ImgSlot aspect="aspect-video" />
-              </div>
-            ))}
-          </div>
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+            <GalleryImg aspect="aspect-video" src="" alt="" />
+          </div> */}
 
         </main>
 
-        {/* ── Footer ── */}
-        <Footer/>
+        <Footer />
       </div>
     </>
   );
