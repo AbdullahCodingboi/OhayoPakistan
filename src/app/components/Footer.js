@@ -97,7 +97,7 @@ const Footer = () => {
                 letterSpacing: 2,
               }}
             >
-              OHAYO
+              OHAYO PAKISTAN
             </span>
           </div>
           <div
@@ -277,7 +277,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {editing && (
+      {/* {editing && (
         <div
           style={{
             maxWidth: 1100,
@@ -315,7 +315,7 @@ const Footer = () => {
             Reset
           </button>
         </div>
-      )}
+      )} */}
 
       <div
         style={{

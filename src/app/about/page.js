@@ -31,9 +31,9 @@ const MISSION_KANJI = ["学", "語", "日", "本", "人"];
 
 const TEAM = [
   { name: "Shahan Siddiqui", role: "Instructor & CTO", pic: "/Shahan.png" },
-  { name: "Afzal Siddiqui", role: "CEO", pic: "/Afzal.png" },
+  { name: "Afzaal Siddiqui", role: "CEO & Lead Instructor", pic: "/Afzal.png" },
   
-  { name: "Obaidullah Siddiqui", role: "Instructor", pic: "/obaid.png" },
+  { name: "Ubaidullah Siddiqui", role: "Instructor", pic: "/obaid.png" },
 ];
 
 const FOOTER_LINKS   = ["Home", "About Us", "Contact Us", "Admissions"];
@@ -350,7 +350,7 @@ export default function OhayoAboutPage() {
               }}>
                 <span style={{ color: "#c0001c", fontWeight: 900, fontSize: 16 }}>お</span>
               </div>
-              <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: 2 }}>OHAYO</span>
+              <span style={{ fontWeight: 900, fontSize: 15, letterSpacing: 2 }}>OHAYO PAKISTAN</span>
             </div>
             <div style={{ fontSize: 11, opacity: 0.7, marginBottom: 20, lineHeight: 1.6 }}>Pakistan Japan Training Center</div>
             <div style={{ display: "flex", gap: 10 }}>
@@ -397,7 +397,7 @@ export default function OhayoAboutPage() {
           <div style={{ fontWeight: 900, fontSize: 12, letterSpacing: 3, textTransform: "uppercase" }}>
             OHAYO PAKISTAN JAPAN TRAINING CENTER
           </div>
-          <div style={{ fontSize: 11, opacity: 0.6 }}>© {new Date().getFullYear()} OHAYO Pakistan. All rights reserved.</div>
+          {/* <div style={{ fontSize: 11, opacity: 0.6 }}>© {new Date().getFullYear()} OHAYO Pakistan. All rights reserved.</div> */}
         </div>
       </footer>
     </div>
