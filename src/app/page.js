@@ -332,7 +332,7 @@ export default function OhayoPage() {
               "We believe in opening doors to global opportunities — one student at a time."
             </p>
             <footer className="text-red-600 text-xs font-bold tracking-wider uppercase mt-2">
-              — Afzal Ahmed, CEO
+              — Afzal Siddiqui, CEO & Lead Instructor
             </footer>
           </blockquote>
           <a href="/about" className="text-xs tracking-[0.2em] uppercase text-white/80 hover:text-red-500 transition-colors font-bold">
@@ -456,9 +456,9 @@ export default function OhayoPage() {
         <Link href={"/contact"} className="px-10 py-4 bg-red-600 hover:bg-red-500 text-white font-black text-xs tracking-[0.25em] uppercase rounded transition-all hover:shadow-xl hover:shadow-red-600/30">
           Contact Us
         </Link>
-        <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs tracking-wide">
+          <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs tracking-wide">
           <span>✉ ohayopakistan@gmail.com</span>
-          <span>📞 +92 329-505838</span>
+          <span>📞 +92 329-5050838</span>
         </div>
       </section>
 

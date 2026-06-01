@@ -270,7 +270,7 @@ const Footer = () => {
               lineHeight: 2,
             }}
           >
-            {/* <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div> */}
+            <div>📍 Inside Tameer-e-Millat Academy Near Quest Education System Morgah., Rawalpindi</div>
             <div>✉ ohayopakistan@gmail.com</div>
             <div>📞 +92 329-505838</div>
           </div>
@@ -339,7 +339,7 @@ const Footer = () => {
           OHAYO PAKISTAN JAPAN TRAINING CENTER
         </div>
         <div style={{ fontSize: 11, opacity: 0.6 }}>
-          © {new Date().getFullYear()} OHAYO Pakistan. All rights reserved.
+          {/* © {new Date().getFullYear()} OHAYO Pakistan. All rights reserved. */}
         </div>
       </div>
     </footer>

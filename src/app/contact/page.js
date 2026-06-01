@@ -256,7 +256,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Phone</p>
-                  <p className="text-white/80 text-sm">+92-328-5809459</p>
+                  <p className="text-white/80 text-sm">+92 329-5050838</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
