@@ -245,7 +245,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Address</p>
-                  <p className="text-white/80 text-sm leading-relaxed">B-43 2nd floor Changezy Street, B-block,<br />Satellite town, Rawalpindi, Pakistan</p>
+                  <address className="not-italic text-white/80 text-sm leading-relaxed">Tameer-e-Millat Near Quest Education System<br />Morgah, Rawalpindi, Pakistan</address>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -256,7 +256,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Phone</p>
-                  <p className="text-white/80 text-sm">+92 329-5050838</p>
+                  <p className="text-white/80 text-sm"><a href="tel:+923295050838" className="hover:underline">+92 329-5050838</a></p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -267,26 +267,31 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Email</p>
-                  <p className="text-white/80 text-sm">info@apjtc.com</p>
+                  <p className="text-white/80 text-sm"><a href="mailto:ohayopakistan@gmail.com" className="hover:underline">info@apjtc.com</a></p>
                 </div>
               </div>
             </div>
-            {[
-  // { label: "F", href: "https://facebook.com/yourpage" },
-  { label: "IG", href: "https://www.instagram.com/ohayopakistan/" },
-  { label: "WA", href: "https://wa.me/3295050838" },
-].map((s) => (
-  <a
-    key={s.label}
-    href={s.href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-9 h-9 rounded-sm text-white/50 hover:text-white text-xs font-bold transition-colors duration-200 flex items-center justify-center"
-    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-  >
-    {s.label}
-  </a>
-))}
+            <div className="mt-6 flex items-center gap-3">
+              {/* social links */}
+              {[
+                // { label: "F", href: "https://facebook.com/yourpage", aria: "Facebook" },
+                { label: "IG", href: "https://www.instagram.com/ohayopakistan/", aria: "Instagram" },
+                { label: "WA", href: "https://wa.me/923295050838", aria: "WhatsApp" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={s.aria}
+                  title={s.aria}
+                  className="w-9 h-9 rounded-sm text-white/50 hover:text-white text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+                  style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Right — Send a message */}
