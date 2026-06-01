@@ -267,7 +267,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-white/40 uppercase tracking-wider mb-1">Email</p>
-                  <p className="text-white/80 text-sm"><a href="mailto:ohayopakistan@gmail.com" className="hover:underline">info@apjtc.com</a></p>
+                  <p className="text-white/80 text-sm"><a href="mailto:ohayopakistan@gmail.com" className="hover:underline">ohayopakistan@gmail.com</a></p>
                 </div>
               </div>
             </div>
