@@ -285,9 +285,9 @@ export default function OhayoPage() {
             <Cloud x="10%" y="10%" scale={1.2} opacity={1} rotate={5} />
           </div>
           <div>
-            <p className="text-red-200 text-xs tracking-[0.4em] uppercase mb-2">無料 · Free</p>
+            {/* <p className="text-red-200 text-xs tracking-[0.4em] uppercase mb-2">無料 · Free</p> */}
             <h3 className="text-3xl sm:text-4xl font-black text-white leading-tight">
-              Free Online<br />JLPT Course
+              Online<br />JLPT Course
             </h3>
             <p className="text-red-200/60 text-sm mt-2">July Session · Limited Seats</p>
           </div>

@@ -31,7 +31,7 @@ const MISSION_KANJI = ["学", "語", "日", "本", "人"];
 
 const TEAM = [
   { name: "Afzal Siddiqui", role: "CEO " },
-  { name: "Shahan Siddiqui",        role: "Instructor" },
+  { name: "Shahan Siddiqui",        role: "Instructor & CTO" },
   { name: "Obaidullah Siddiqui",      role: "Instructor" },
 ];
 
