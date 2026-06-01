@@ -274,7 +274,7 @@ export default function ContactPage() {
             {[
   // { label: "F", href: "https://facebook.com/yourpage" },
   { label: "IG", href: "https://www.instagram.com/ohayopakistan/" },
-  { label: "WA", href: "https://wa.me/329505838" },
+  { label: "WA", href: "https://wa.me/3295050838" },
 ].map((s) => (
   <a
     key={s.label}

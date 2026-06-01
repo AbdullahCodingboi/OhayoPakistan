@@ -458,7 +458,7 @@ export default function OhayoPage() {
         </Link>
           <div className="mt-10 flex flex-wrap justify-center gap-6 text-white/60 text-xs tracking-wide">
           <span>✉ ohayopakistan@gmail.com</span>
-          <span>📞 +92 329-5050838</span>
+          <span>📞 +92 -5050838</span>
         </div>
       </section>
 

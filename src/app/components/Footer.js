@@ -272,7 +272,7 @@ const Footer = () => {
           >
             <div>📍 Inside Tameer-e-Millat Academy Near Quest Education System Morgah., Rawalpindi</div>
             <div>✉ ohayopakistan@gmail.com</div>
-            <div>📞 +92 329-505838</div>
+            <div>📞 +92 329-5050838</div>
           </div>
         </div>
       </div>

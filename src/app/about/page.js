@@ -30,9 +30,10 @@ const JOURNEY = [
 const MISSION_KANJI = ["学", "語", "日", "本", "人"];
 
 const TEAM = [
-  { name: "Afzal Siddiqui", role: "CEO " },
-  { name: "Shahan Siddiqui",        role: "Instructor & CTO" },
-  { name: "Obaidullah Siddiqui",      role: "Instructor" },
+  { name: "Shahan Siddiqui", role: "Instructor & CTO", pic: "/Shahan.png" },
+  { name: "Afzal Siddiqui", role: "CEO", pic: "/Afzal.png" },
+  
+  { name: "Obaidullah Siddiqui", role: "Instructor", pic: "/obaid.png" },
 ];
 
 const FOOTER_LINKS   = ["Home", "About Us", "Contact Us", "Admissions"];
@@ -102,8 +103,8 @@ export default function OhayoAboutPage() {
           <div style={{
   width: "78%", height: "72%",
   borderRadius: "0 999px 999px 0",
-  background: "#0d0000",
-  border: "1px solid rgba(192,0,28,0.2)",
+  background: "transparent",
+  border: "5px solid rgba(192,0,28,0.2)",
   display: "flex", flexDirection: "column",
   alignItems: "center", justifyContent: "center",
   gap: 4,
@@ -316,26 +317,22 @@ export default function OhayoAboutPage() {
         </p>
         <h2 style={{ textAlign: "center", fontSize: 36, fontWeight: 900, marginBottom: 52 }}>Meet Our Team</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
-          {TEAM.map(m => (
-            <div key={m.name} style={{
-              borderRadius: 16, overflow: "hidden",
-              border: "1px solid rgba(255,255,255,0.08)", background: "#111",
-            }}>
-              <div style={{
-                width: "100%", aspectRatio: "3/4", background: "#1a1a1a",
-                display: "flex", flexDirection: "column",
-                alignItems: "center", justifyContent: "center",
-                gap: 10, color: "rgba(255,255,255,0.15)",
-              }}>
-                <div style={{ fontSize: 52, opacity: 0.4 }}>👤</div>
-                <div style={{ fontSize: 11, letterSpacing: 2, textTransform: "uppercase" }}>Photo</div>
-              </div>
-              <div style={{ background: "#c0001c", padding: "14px 18px" }}>
-                <div style={{ color: "#fff", fontWeight: 800, fontSize: 15 }}>{m.name}</div>
-                <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, marginTop: 3 }}>{m.role}</div>
-              </div>
-            </div>
-          ))}
+       {TEAM.map(m => (
+  <div key={m.name} style={{
+    borderRadius: 16, overflow: "hidden",
+    border: "1px solid rgba(255,255,255,0.08)", background: "#111",
+  }}>
+    <img
+      src={m.pic}
+      alt={m.name}
+      style={{ width: "100%", aspectRatio: "2/3", objectFit: "cover", display: "block",}}
+    />
+    <div style={{ background: "#c0001c", padding: "14px 18px" }}>
+      <div style={{ color: "#fff", fontWeight: 800, fontSize: 15 }}>{m.name}</div>
+      <div style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, marginTop: 3 }}>{m.role}</div>
+    </div>
+  </div>
+))}
         </div>
       </section>
 
@@ -385,9 +382,9 @@ export default function OhayoAboutPage() {
           <div>
             <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 18, letterSpacing: 1 }}>Contact</div>
             <div style={{ color: "rgba(255,255,255,0.75)", fontSize: 13, lineHeight: 2 }}>
-              {/* <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div> */}
+              <div>📍 Inside Tameer-e-Millat Academy Near Quest Education System Morgah., Rawalpindi</div>
               <div>✉ ohayopakistan@gmail.com</div>
-              <div>📞 +92 329505838</div>
+              <div>📞 +92 3295050838</div>
             </div>
           </div>
         </div>
