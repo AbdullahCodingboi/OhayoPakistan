@@ -271,16 +271,22 @@ export default function ContactPage() {
                 </div>
               </div>
             </div>
-            <div className="mt-10 pt-10 border-t border-white/10">
-              <p className="text-xs text-white/30 uppercase tracking-widest mb-3">Follow us</p>
-              <div className="flex gap-3">
-                {["F", "IG", "WA"].map((s) => (
-                  <button key={s} className="w-9 h-9 rounded-sm text-white/50 hover:text-white text-xs font-bold transition-colors duration-200" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </div>
+            {[
+  // { label: "F", href: "https://facebook.com/yourpage" },
+  { label: "IG", href: "https://www.instagram.com/ohayopakistan/" },
+  { label: "WA", href: "https://wa.me/329505838" },
+].map((s) => (
+  <a
+    key={s.label}
+    href={s.href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="w-9 h-9 rounded-sm text-white/50 hover:text-white text-xs font-bold transition-colors duration-200 flex items-center justify-center"
+    style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
+  >
+    {s.label}
+  </a>
+))}
           </div>
 
           {/* Right — Send a message */}

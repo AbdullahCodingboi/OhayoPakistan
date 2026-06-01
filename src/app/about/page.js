@@ -30,9 +30,9 @@ const JOURNEY = [
 const MISSION_KANJI = ["学", "語", "日", "本", "人"];
 
 const TEAM = [
-  { name: "Muhammad Ilyas", role: "CEO & Lead Instructor" },
-  { name: "M Afzal",        role: "CTO & Instructor" },
-  { name: "Ali Hamza",      role: "Instructor & Technical Consultant" },
+  { name: "Afzal Siddiqui", role: "CEO " },
+  { name: "Shahan Siddiqui",        role: "Instructor" },
+  { name: "Obaidullah Siddiqui",      role: "Instructor" },
 ];
 
 const FOOTER_LINKS   = ["Home", "About Us", "Contact Us", "Admissions"];
@@ -385,9 +385,9 @@ export default function OhayoAboutPage() {
           <div>
             <div style={{ fontWeight: 800, fontSize: 13, marginBottom: 18, letterSpacing: 1 }}>Contact</div>
             <div style={{ color: "rgba(255,255,255,0.75)", fontSize: 13, lineHeight: 2 }}>
-              <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div>
-              <div>✉ info@ohayo.com.pk</div>
-              <div>📞 +92 000-0000000</div>
+              {/* <div>📍 B-47, 2nd Floor Changery St., Rawalpindi</div> */}
+              <div>✉ ohayopakistan@gmail.com</div>
+              <div>📞 +92 329505838</div>
             </div>
           </div>
         </div>
