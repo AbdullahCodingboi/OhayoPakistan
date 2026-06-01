@@ -401,15 +401,15 @@ export default function JlptN4Page() {
           </Section>
 
           {/* TEST DATES */}
-          <Section id="dates" active={activeTab} label="Test Dates for 2025">
+          <Section id="dates" active={activeTab} label="Test Dates for 2026">
             <p className="text-sm leading-relaxed mb-6" style={{color:"rgba(255,255,255,0.65)"}}>
               JLPT N4 is held on the same dates as all other JLPT levels. Plan your preparation timeline to allow at least 3–6 months of focused study before your target date.
             </p>
 
             <div className="space-y-3 mb-5">
               {[
-                {date:"July 6, 2025",     reg:"Registration opens mid-March", status:"Upcoming", color:"#22c55e"},
-                {date:"December 7, 2025", reg:"Registration opens mid-August", status:"Upcoming", color:"#22c55e"},
+                {date:"July 5, 2026",     reg:"Registration opens mid-March", status:"Upcoming", color:"#22c55e"},
+                {date:"December 6, 2026", reg:"Registration opens mid-August", status:"Upcoming", color:"#22c55e"},
               ].map((d,i)=>(
                 <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 rounded-sm"
                   style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)"}}>

@@ -22,7 +22,7 @@ const JOURNEY = [
     desc: "Dozens of students successfully passed JLPT exams, and many secured interviews and SSW opportunities for Japan. We enhanced our curriculum with mock tests, cultural workshops, and personalized guidance.",
   },
   {
-    year: "2025", title: "Innovation", side: "right",
+    year: "2026", title: "Innovation", side: "right",
     desc: "OHAYO Pakistan continues to lead with purpose — supporting more students in achieving their dream of studying and working in Japan. With improved teaching methods and expert mentorship, brighter futures await.",
   },
 ];

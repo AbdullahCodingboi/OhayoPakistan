@@ -107,7 +107,7 @@ const COURSES = [
     title: "JLPT N5 & N4",
     details: [
       { label: "Course Duration", value: "14 Weeks" },
-      { label: "Test Date", value: "December 2025" },
+      { label: "Test Date", value: "December 2026" },
     ],
   },
   {

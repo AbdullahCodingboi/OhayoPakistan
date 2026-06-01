@@ -341,15 +341,15 @@ export default function JlptN5Page() {
           </Section>
 
           {/* TEST DATES */}
-          <Section id="dates" active={activeTab} label="Test Dates for 2025">
+          <Section id="dates" active={activeTab} label="Test Dates for 2026">
             <p className="text-sm leading-relaxed mb-6" style={{color:"rgba(255,255,255,0.65)"}}>
-              The JLPT N5 is scheduled for the following dates in 2025. Registration opens several months before each session.
+              The JLPT N5 is scheduled for the following dates in 2026. Registration opens several months before each session.
             </p>
 
             <div className="space-y-3">
               {[
-                {date:"July 6, 2025",    reg:"Registration opens mid-March",  status:"Upcoming",  color:"#22c55e"},
-                {date:"December 7, 2025",reg:"Registration opens mid-August", status:"Upcoming",  color:"#22c55e"},
+                {date:"July 5, 2026",    reg:"Registration opens mid-March",  status:"Upcoming",  color:"#22c55e"},
+                {date:"December 6, 2026",reg:"Registration opens mid-August", status:"Upcoming",  color:"#22c55e"},
               ].map((d,i)=>(
                 <div key={i} className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-5 py-4 rounded-sm"
                   style={{background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)"}}>
@@ -372,12 +372,6 @@ export default function JlptN5Page() {
               ))}
             </div>
 
-            <div className="mt-5 px-5 py-4 rounded-sm" style={{background:"rgba(234,179,8,0.06)",border:"1px solid rgba(234,179,8,0.15)"}}>
-              <p className="text-xs leading-relaxed" style={{color:"rgba(255,255,255,0.5)"}}>
-                <span className="font-bold text-yellow-400">Note: </span>
-                Test availability varies by region; some locations may offer only one session per year. Check with local test centers for details.
-              </p>
-            </div>
           </Section>
 
           {/* CAREERS */}
